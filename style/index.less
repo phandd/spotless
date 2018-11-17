@@ -1,0 +1,109 @@
+@import "components/MediaObject";
+@import "components/MenuBar";
+@import "components/MenuItem";
+@import "components/Player";
+@import "components/PlayerControl";
+@import "components/SpotifyLogo";
+
+@font-face {
+  font-family: Spotify Circular Light;
+  src: url('../public/fonts/CircularSpUIv3T-Light.woff2');
+}
+
+@font-face {
+  font-family: Spotify Circular Bold;
+  src: url('../public/fonts/CircularSpUIv3T-Bold.woff2');
+}
+
+@font-face {
+  font-family: Spotify Circular Book;
+  src: url('../public/fonts/CircularSpUIv3T-Book.woff2');
+}
+
+@font-face {
+  font-family: Spoticon;
+  src: url('../public/fonts/spoticon_regular_2.woff2');
+}
+
+.icon-player {
+  &:before {
+    content: "\F132";
+    font-family: Spoticon;
+  }
+}
+
+.icon-queue {
+  &:before {
+    content: "\F13A";
+    font-family: Spoticon;
+  }
+}
+
+.icon-search {
+  &:before {
+    content: "\F140";
+    font-family: Spoticon;
+  }
+}
+
+.icon-library {
+  &:before {
+    content: "\F116";
+    font-family: Spoticon;
+  }
+}
+
+.icon-shuffle {
+  &:before {
+    content: "\F144";
+    font-family: Spoticon;
+  }
+}
+
+.icon-shuffle {
+  &:before {
+    content: "\F144";
+    font-family: Spoticon;
+  }
+}
+
+.icon-skip-back {
+  &:before {
+    content: "\F146";
+    font-family: Spoticon;
+  }
+}
+
+.icon-play {
+  &:before {
+    content: "\F132";
+    font-family: Spoticon;
+  }
+}
+
+.icon-pause {
+  &:before {
+    content: "\F130";
+    font-family: Spoticon;
+  }
+}
+
+.icon-skip-forward {
+  &:before {
+    content: "\F148";
+    font-family: Spoticon;
+  }
+}
+
+.icon-repeat {
+  &:before {
+    content: "\F13E";
+    font-family: Spoticon;
+  }
+}
+
+body {
+  background-color: @page-background;
+  color: @default-text-color;
+  font-family: "Spotify Circular Light";
+}

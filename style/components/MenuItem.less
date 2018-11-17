@@ -1,0 +1,18 @@
+.menu-item {
+  flex-grow: 1;
+  font-size: 25px;
+  text-align: center;
+  cursor: pointer;
+  height: 55px;
+  line-height: 2;
+  transition: all 0.4s;
+}
+
+.menu-item.selected {
+  background-color: #181818;
+  & > div {
+    &:before {
+      color: @default-text-color-selected;
+    }
+  }
+}
