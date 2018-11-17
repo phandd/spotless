@@ -1,0 +1,43 @@
+.control-button {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  color: hsla(0,0%,100%,.6);
+  width: 3em;
+  height: 3em;
+  font-size: 18px;
+  outline: none;
+  line-height: 3em;
+  margin: 10px;
+
+  &:hover {
+    color: #fff;
+  }
+
+  & > * {
+    transition: all 0.4s;
+  }
+}
+
+.control-button.icon-play {
+  position: relative;
+  color: #000;
+
+  &:hover {
+    &:after {
+      background-color: #fff;
+    }
+  }
+
+  &:after {
+    transition: all 0.2s;
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 500px;
+    background-color: hsla(0,0%,100%,.6);
+  }
+}
