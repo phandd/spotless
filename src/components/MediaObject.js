@@ -1,15 +1,15 @@
 import React from 'react'
 
-const MediaObject = () => {
+const MediaObject = ({ coverArtUrl, trackName, artists }) => {
   return(
     <div className='media-object'>
-      <div className='cover-art' style={{"backgroundImage" : `url(https://i.scdn.co/image/c1a53135d587eb013f86a8228db067936364d779)`}} />
+      <div className='cover-art' style={{"backgroundImage" : `url(${coverArtUrl})`}} />
       <div className='media-info'>
         <div className='info-name'>
-          <span>Let you love me</span>
+          <span>{trackName}</span>
         </div>
         <div className='info-meta'>
-        <span>Rita Ora</span>
+        <span>{artists}</span>
         </div>
       </div>
     </div>

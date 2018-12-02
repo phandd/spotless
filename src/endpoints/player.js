@@ -1,2 +1,9 @@
-export const currentlyPlayingTrack = () => `/me/player/currently-playing`
-
+export const getAvailableDevicesEndpoint = () => '/me/player/devices'
+export const transferPlaybackEndpoint = () => '/me/player'
+export const getPlaybackDataEndpoint = () => '/me/player'
+export const startPlaybackEndpoint = () => '/me/player/play'
+export const pausePlaybackEndpoint = () => '/me/player/pause'
+export const toggleShuffleEndpoint = (state) => `/me/player/shuffle?state=${state}`
+export const setRepeatMode = (state) => `/me/player/repeat?state=${state}`
+export const skipNext = () => '/me/player/next'
+export const skipPrevious = () => '/me/player/previous'

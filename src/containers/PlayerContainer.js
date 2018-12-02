@@ -1,28 +1,42 @@
 import React, { Component } from 'react'
 import Player from '../components/Player'
 import { connect } from 'react-redux'
-import { fetchPlayingTrack } from '../actions/player'
+import {
+  fetchPlayerData,
+  onTogglePlay,
+  onToggleShuffle,
+  onSetRepeatMode,
+  onSkipNext,
+  onSkipPrevious
+} from '../actions/player'
+import { getPlayerControlState, getPlayingTrackData } from '../selectors/player';
 
 class PlayerContainer extends Component {
   componentDidMount() {
-    const { fetchPlayingTrack } = this.props
+    const { fetchPlayerData } = this.props
 
-    fetchPlayingTrack()
+    fetchPlayerData()
   }
 
   render() {
-    const { track } = this.props
-
     return (
-      <Player />
+      this.props.playingTrackData ? <Player {...this.props}/> : null
     )
   }
 }
 
-const mapStateToProps = (state, ownProps) => ({
-  track: state.player.currentlyPlayingTrack
-})
+const mapStateToProps = (state) => {
+  return {
+    playingTrackData: getPlayingTrackData(state),
+    playerControlState: getPlayerControlState(state)
+  }
+}
 
 export default connect(mapStateToProps, {
-  fetchPlayingTrack
+  fetchPlayerData,
+  onTogglePlay,
+  onToggleShuffle,
+  onSetRepeatMode,
+  onSkipNext,
+  onSkipPrevious
 })(PlayerContainer)

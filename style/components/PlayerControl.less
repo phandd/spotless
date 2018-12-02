@@ -18,7 +18,7 @@
   }
 }
 
-.control-button.icon-play {
+.control-button.icon-play,.control-button.icon-pause {
   position: relative;
   color: #000;
 
@@ -39,5 +39,13 @@
     bottom: 0;
     border-radius: 500px;
     background-color: hsla(0,0%,100%,.6);
+  }
+}
+
+.control-button.active {
+  color: @default-text-color-selected;
+
+  &:hover {
+    color: @default-text-color-selected-hover;
   }
 }
