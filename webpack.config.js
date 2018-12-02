@@ -27,7 +27,8 @@ module.exports = {
             options: {
               sourceMap: true,
               globalVars: {
-                "default-text-color-selected": '#1ed760',
+                "default-text-color-selected": '#1db954',
+                "default-text-color-selected-hover": '#1ed760',
                 "default-text-color-hover": "#fff",
                 "default-text-color": "hsla(0,0%,100%,.6)",
                 "page-background": "#1c1c1f"

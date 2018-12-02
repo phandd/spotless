@@ -2,14 +2,18 @@ import React from 'react'
 import MediaObject from './MediaObject'
 import PlayerControl from './PlayerControl'
 
-const Player = () => {
+const Player = ({
+  playingTrackData,
+  playerControlState,
+  ...playerControlActions
+}) => {
   return(
     <div className='player'>
       <div className='player-media-object'>
-        <MediaObject />
+        <MediaObject {...playingTrackData}/>
       </div>
       <div className='player-player-control'>
-        <PlayerControl />
+        <PlayerControl {...playerControlState} {...playerControlActions}/>
       </div>
     </div>
   )
