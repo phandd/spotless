@@ -1,0 +1,36 @@
+.search-menu-bar {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: 800;
+  margin-top: 30px;
+  margin-left: 25%;
+  margin-right: 25%;
+
+  .search-menu-bar-item {
+    transition: all 0.4s;
+    position: relative;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: flex;
+    justify-content: center;
+
+    &:hover {
+      cursor: pointer;
+      color: @default-text-color-hover;
+    }
+
+    &.selected {
+      color: white;
+
+      &::after {
+        position: absolute;
+        content: "";
+        width: 20px;
+        height: 2px;
+        background-color: @default-text-color-selected;
+        bottom: 0;
+      }
+    }
+  }
+}

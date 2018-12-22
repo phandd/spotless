@@ -1,0 +1,43 @@
+.search-field {
+  display: flex;
+  justify-content: center;
+
+  .search-input {
+    width: 80%;
+    position: relative;
+
+    input {
+      width: 100%;
+      border-radius: 20px;
+      outline: none;
+      padding-left: 20px;
+      padding-right: 40px;
+      background-color: transparent;
+      border: 2px solid white;
+      height: 35px;
+      color: @default-text-color;
+      box-sizing: border-box;
+    }
+
+    button {
+      cursor: pointer;
+      position: absolute;
+      font-family: Spoticon;
+      right: 0;
+      font-size: 22px;
+      color: white;
+      background-color: transparent;
+      border: none;
+      height: 100%;
+      right: 5px;
+      outline: none;
+      
+      .search-button-icon {
+        &::after {
+          content: "\F140";
+          font-style: normal
+        }
+      }
+    }
+  }
+}

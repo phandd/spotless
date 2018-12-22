@@ -1,9 +1,12 @@
-export const getAvailableDevicesEndpoint = () => '/me/player/devices'
-export const transferPlaybackEndpoint = () => '/me/player'
-export const getPlaybackDataEndpoint = () => '/me/player'
-export const startPlaybackEndpoint = () => '/me/player/play'
-export const pausePlaybackEndpoint = () => '/me/player/pause'
-export const toggleShuffleEndpoint = (state) => `/me/player/shuffle?state=${state}`
-export const setRepeatMode = (state) => `/me/player/repeat?state=${state}`
-export const skipNext = () => '/me/player/next'
-export const skipPrevious = () => '/me/player/previous'
+export default {
+  getAvailableDevicesEndpoint: () => '/me/player/devices',
+  transferPlaybackEndpoint: () => '/me/player',
+  getPlaybackDataEndpoint: () => '/me/player',
+  startPlaybackEndpoint: () => '/me/player/play',
+  pausePlaybackEndpoint: () => '/me/player/pause',
+  toggleShuffleEndpoint: (state) => `/me/player/shuffle?state=${state}`,
+  setRepeatMode: (state) => `/me/player/repeat?state=${state}`,
+  skipNext: () => '/me/player/next',
+  skipPrevious: () => '/me/player/previous',
+  play: () => '/me/player/play'
+}
