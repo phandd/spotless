@@ -1,0 +1,39 @@
+.media-list-item {
+  display: flex;
+
+  .item-cover-art {
+    height: 50px;
+    width: 50px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+  }
+
+  .item-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 10px;
+    line-height: 1.5;
+
+    .info-name {
+      color: white;
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .info-context {
+      font-size: 12px;
+      font-weight: 600;
+      display: flex;
+    }
+
+    .context-secondary {
+      &::before {
+        content: "•";
+        margin-left: 5px;
+        margin-right: 5px;
+      }
+    }
+  }
+}

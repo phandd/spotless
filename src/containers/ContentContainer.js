@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { MENUBAR_ITEMS } from '../constants/menubar'
 import PlayerContainer from './PlayerContainer'
+import SearchContainer from './SearchContainer'
 import { connect } from 'react-redux'
 
 const ContentContainer = ({ selectedMenubarItem }) => {
@@ -11,15 +12,15 @@ const ContentContainer = ({ selectedMenubarItem }) => {
     case MENUBAR_ITEMS.PLAYER:
       content = <PlayerContainer /> // Menu component
       break
-    case MENUBAR_ITEMS.QUEUE:
-      content = <div></div> // Menu component
-      break
+    // case MENUBAR_ITEMS.QUEUE:
+    //   content = <div></div> // Menu component
+    //   break
     case MENUBAR_ITEMS.SEARCH:
-      content = <div></div> // Menu component
+      content = <SearchContainer />
       break
-    case MENUBAR_ITEMS.LIBRARY:
-      content = <div></div> // Menu component
-      break
+    // case MENUBAR_ITEMS.LIBRARY:
+    //   content = <div></div> // Menu component
+    //   break
     default:
       content = <div></div> // Menu component
   }

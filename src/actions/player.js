@@ -1,20 +1,11 @@
 import { callApiThunk } from '../utils/api'
-import {
-  getAvailableDevicesEndpoint,
-  transferPlaybackEndpoint,
-  getPlaybackDataEndpoint,
-  startPlaybackEndpoint,
-  pausePlaybackEndpoint,
-  toggleShuffleEndpoint,
-  setRepeatMode,
-  skipNext, skipPrevious
-} from '../endpoints/player'
+import playerEndpointGetters from '../endpoints/player'
 import { PLAYER as actionTypes } from '../constants/actionTypes';
 
 // A thunk to fetch available devices
 const _fetchAvailableDevices = () => dispatch => {
   return dispatch(callApiThunk({
-    endpoint: getAvailableDevicesEndpoint(),
+    endpoint: playerEndpointGetters.getAvailableDevicesEndpoint(),
     method: 'GET',
     types: [ actionTypes.FETCH_AVAILABLE_DEVICES_REQUEST, actionTypes.FETCH_AVAILABLE_DEVICES_SUCCESS, actionTypes.FETCH_AVAILABLE_DEVICES_FAILURE ],
     responseSelector: 'devices'
@@ -40,7 +31,7 @@ export const fetchPlayerData = () => (dispatch, getState) => {
 
       if (!getState().player.activeDevice) {
         return dispatch(callApiThunk({
-          endpoint: transferPlaybackEndpoint(),
+          endpoint: playerEndpointGetters.transferPlaybackEndpoint(),
           method: 'PUT',
           types: [ actionTypes.TRANSFER_PLAYBACK_REQUEST, actionTypes.TRANSFER_PLAYBACK_SUCCESS, actionTypes.TRANSFER_PLAYBACK_FAILURE ],
           body: {
@@ -56,25 +47,25 @@ export const fetchPlayerData = () => (dispatch, getState) => {
     // Timeout is needed because transfer playback is done a bit slow by Spotify despite that it already returns 204
     .then(() => setTimeout(() => {
         return dispatch(callApiThunk({
-          endpoint: getPlaybackDataEndpoint(),
+          endpoint: playerEndpointGetters.getPlaybackDataEndpoint(),
           method: 'GET',
           types: [ actionTypes.FETCH_PLAYBACK_DATA_REQUEST, actionTypes.FETCH_PLAYBACK_DATA_SUCCESS, actionTypes.FETCH_PLAYBACK_DATA_FAILURE ]
         }))
-      }, 500)
+      }, 1000)
     )
 }
 
 export const onTogglePlay = () => (dispatch, getState) => {
   if (getState().player.playback["is_playing"]) {
     return dispatch(callApiThunk({
-      endpoint: pausePlaybackEndpoint(),
+      endpoint: playerEndpointGetters.pausePlaybackEndpoint(),
       method: 'PUT',
       types: [ actionTypes.PAUSE_PLAYBACK_REQUEST, actionTypes.PAUSE_PLAYBACK_SUCCESS, actionTypes.PAUSE_PLAYBACK_FAILURE ]
     }))
   }
 
   return dispatch(callApiThunk({
-    endpoint: startPlaybackEndpoint(),
+    endpoint: playerEndpointGetters.startPlaybackEndpoint(),
     method: 'PUT',
     types: [ actionTypes.START_PLAYBACK_REQUEST, actionTypes.START_PLAYBACK_SUCCESS, actionTypes.START_PLAYBACK_FAILURE ]
   }))
@@ -82,7 +73,7 @@ export const onTogglePlay = () => (dispatch, getState) => {
 
 export const onToggleShuffle = () => (dispatch, getState) => {
   return dispatch(callApiThunk({
-    endpoint: toggleShuffleEndpoint(!getState().player.playback["shuffle_state"]),
+    endpoint: playerEndpointGetters.toggleShuffleEndpoint(!getState().player.playback["shuffle_state"]),
     method: 'PUT',
     types: [ actionTypes.TOGGLE_SHUFFLE_REQUEST, actionTypes.TOGGLE_SHUFFLE_SUCCESS, actionTypes.TOGGLE_SHUFFLE_FAILURE ]
   }, { shuffleState: !getState().player.playback["shuffle_state"] }))
@@ -97,7 +88,7 @@ export const onSetRepeatMode = () => (dispatch, getState) => {
   })();
 
   return dispatch(callApiThunk({
-    endpoint: setRepeatMode(nextMode),
+    endpoint: playerEndpointGetters.setRepeatMode(nextMode),
     method: 'PUT',
     types: [ actionTypes.SET_REPEAT_MODE_REQUEST, actionTypes.SET_REPEAT_MODE_SUCCESS, actionTypes.START_PLAYBACK_FAILURE ]
   }, { repeatState: nextMode }))
@@ -105,30 +96,51 @@ export const onSetRepeatMode = () => (dispatch, getState) => {
 
 export const onSkipNext = () => (dispatch) => {
   return dispatch(callApiThunk({
-    endpoint: skipNext(),
+    endpoint: playerEndpointGetters.skipNext(),
     method: 'POST',
     types: [ actionTypes.SKIP_NEXT_REQUEST, actionTypes.SKIP_NEXT_SUCCESS, actionTypes.SKIP_NEXT_FAILURE ]
   }))
     .then(setTimeout(() => {
       return dispatch(callApiThunk({
-        endpoint: getPlaybackDataEndpoint(),
+        endpoint: playerEndpointGetters.getPlaybackDataEndpoint(),
         method: 'GET',
         types: [ actionTypes.FETCH_PLAYBACK_DATA_REQUEST, actionTypes.FETCH_PLAYBACK_DATA_SUCCESS, actionTypes.FETCH_PLAYBACK_DATA_FAILURE ]
       }))
-    }, 500))
+    }, 1000))
 }
 
 export const onSkipPrevious = () => (dispatch) => {
   return dispatch(callApiThunk({
-    endpoint: skipPrevious(),
+    endpoint: playerEndpointGetters.skipPrevious(),
     method: 'POST',
     types: [ actionTypes.SKIP_PREVIOUS_REQUEST, actionTypes.SKIP_PREVIOUS_SUCCESS, actionTypes.SKIP_PREVIOUS_FAILURE ]
   }))
     .then(setTimeout(() => {
       return dispatch(callApiThunk({
-        endpoint: getPlaybackDataEndpoint(),
+        endpoint: playerEndpointGetters.getPlaybackDataEndpoint(),
         method: 'GET',
         types: [ actionTypes.FETCH_PLAYBACK_DATA_REQUEST, actionTypes.FETCH_PLAYBACK_DATA_SUCCESS, actionTypes.FETCH_PLAYBACK_DATA_FAILURE ]
       }))
-    }, 500))
+    }, 1000))
+}
+
+export const play = uri => dispatch => {
+  let body;
+  
+  if (uri.includes('track')) {
+    body = {
+      uris: [uri]
+    }
+  } else {
+    body = {
+      "context_uri": uri
+    }
+  }
+
+  return dispatch(callApiThunk({
+    endpoint: playerEndpointGetters.play(),
+    method: 'PUT',
+    body,
+    types: [ actionTypes.PLAY_REQUEST, actionTypes.PLAY_SUCCESS, actionTypes.PLAY_FAILURE ]
+  }))
 }
