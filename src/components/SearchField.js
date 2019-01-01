@@ -1,6 +1,6 @@
 import React from 'react'
 
-const SearchField = ({ onSearch }) => {
+const SearchField = ({ onSearch, lastSearch }) => {
   let textInput = React.createRef();
 
   function handleSubmit() {
@@ -11,6 +11,7 @@ const SearchField = ({ onSearch }) => {
     <div className="search-field">
       <div className="search-input">
         <input type="text"
+               defaultValue={lastSearch}
                ref={textInput}
                onKeyUp={ (e) => e.keyCode === 13 && handleSubmit() }
                placeholder="Start typing..."/>

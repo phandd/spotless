@@ -1,11 +1,8 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { getSearchResult, getCurrentSearchMenu } from '../selectors/search'
-import { SEARCH_TYPES } from '../constants/search'
+import React from 'react'
 import SearchResultItemContainer from '../containers/SearchResultItemContainer'
 
-const SearchResultViewer = ({ result }) => {
-  const items = result ? result.items.map(itemId => <SearchResultItemContainer id={itemId} key={itemId}/>) : [];
+const SearchResultViewer = ({ result, resultType }) => {
+  const items = result ? result.items.map(itemId => <SearchResultItemContainer id={itemId} type={resultType} key={itemId}/>) : [];
 
   return (
     <div className="search-result-viewer">

@@ -124,7 +124,13 @@ export const onSkipPrevious = () => (dispatch) => {
     }, 1000))
 }
 
-export const play = uri => dispatch => {
+export const play = item => dispatch => {
+  const uri = item.uri
+  
+  if (!uri) {
+    throw new Error('Uri is required for playing an item')
+  }
+
   let body;
   
   if (uri.includes('track')) {
@@ -142,5 +148,22 @@ export const play = uri => dispatch => {
     method: 'PUT',
     body,
     types: [ actionTypes.PLAY_REQUEST, actionTypes.PLAY_SUCCESS, actionTypes.PLAY_FAILURE ]
+  }, {
+    item
+  }))
+  .then(setTimeout(() => {
+    return dispatch(callApiThunk({
+      endpoint: playerEndpointGetters.getPlaybackDataEndpoint(),
+      method: 'GET',
+      types: [ actionTypes.FETCH_PLAYBACK_DATA_REQUEST, actionTypes.FETCH_PLAYBACK_DATA_SUCCESS, actionTypes.FETCH_PLAYBACK_DATA_FAILURE ]
+    }))
+  }, 1000))
+}
+
+export const pause = () => dispatch => {
+  return dispatch(callApiThunk({
+    endpoint: playerEndpointGetters.pausePlaybackEndpoint(),
+    method: 'PUT',
+    types: [ actionTypes.PAUSE_PLAYBACK_REQUEST, actionTypes.PAUSE_PLAYBACK_SUCCESS, actionTypes.PAUSE_PLAYBACK_FAILURE ]
   }))
 }

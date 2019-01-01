@@ -16,7 +16,6 @@ export default (state = defaultState, action) => {
 
       return { ...state, availableDevices: action.response, activeDevice: activeDevice || null }
 
-
     case actionTypes.TRANSFER_PLAYBACK_SUCCESS:
       return { ...state, activeDevice: action.device }
 

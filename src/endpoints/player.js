@@ -8,5 +8,6 @@ export default {
   setRepeatMode: (state) => `/me/player/repeat?state=${state}`,
   skipNext: () => '/me/player/next',
   skipPrevious: () => '/me/player/previous',
-  play: () => '/me/player/play'
+  play: () => '/me/player/play',
+  pause: () => '/me/player/pause'
 }

@@ -16,7 +16,7 @@ export const getPlayingTrackData = createSelector(getPlayback, getCoverArtUrl, g
     return null
   }
 
-  return { coverArtUrl, trackName, artists}
+  return { coverArtUrl, trackName, artists }
 })
 
 export const getPlayerControlState = createSelector(getPlayback, playback => {
@@ -30,3 +30,5 @@ export const getPlayerControlState = createSelector(getPlayback, playback => {
     playing: playback['is_playing']
   }
 })
+
+export const getPlaybackItem = state => state.player.playback ? state.player.playback.item : null
