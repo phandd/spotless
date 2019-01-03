@@ -10,7 +10,7 @@ const SearchResultViewer = ({ result, resultType, onLoadMore }) => {
       <div className="search-result-viewer">
         {items}
       </div>
-      <div>
+      <div className="search-load-more-button">
         <button onClick={() => onLoadMore(resultType)}>load more</button>
       </div>
     </div>
