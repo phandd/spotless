@@ -1,7 +1,29 @@
 .search-result-viewer {
   margin: 50px;
+  margin-bottom: 35px;
 
   .media-list-item {
     margin-bottom: 15px;
+  }
+}
+
+.search-load-more-button {
+  display: flex;
+  justify-content: center;
+  margin-right: 25px;
+  margin-bottom: 15px;
+
+  button {
+    transition: all 0.4s;
+    outline: none;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    color: @default-text-color;
+    font-size: 14px;
+
+    &:hover {
+      color: white;
+    }
   }
 }
