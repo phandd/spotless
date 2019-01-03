@@ -6,7 +6,7 @@ export const getCurrentResultType = state => state.search.selectedSeachMenuBarIt
 export const getSearchResult = state => state.search.lastResult ? state.search.lastResult.result[state.search.selectedSeachMenuBarItem] : null;
 export const getSearchItemName = () => createSelector(getSearchItem, searchItem => searchItem ? searchItem.name : null);
 export const getSearchItemPrimaryContext = () => createSelector([getSearchItem], searchItem => {
-  console.log('printed123', searchItem);
+  console.log('printed123');
   if (!searchItem) {
     return null;
   }

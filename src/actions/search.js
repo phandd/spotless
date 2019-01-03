@@ -42,6 +42,15 @@ export const doSearch = keyword => dispatch => {
   )
 }
 
+export const loadMore = resultType => (dispatch, getState) => {
+  return dispatch(callApiThunk({
+    endpoint: getState().search.lastResult.result[resultType].next,
+    schema: searchSchema,
+    method: 'GET',
+    types: [ actionTypes.SEARCH_LOAD_MORE_REQUEST, actionTypes.SEARCH_LOAD_MORE_SUCCESS, actionTypes.SEARCH_LOAD_MORE_FAILURE]
+  }))
+}
+
 // Use selector inside a thunk, because we can not access
 // state inside mapDispatchToProps (https://github.com/reduxjs/react-redux/issues/211)
 // to get the uri of search item from the state itself to directly dispatch play action

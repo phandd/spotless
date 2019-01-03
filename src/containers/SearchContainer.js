@@ -3,12 +3,12 @@ import { connect } from 'react-redux'
 import SearchField from '../components/SearchField'
 import SearchMenuBar from '../components/SearchMenuBar'
 import { getSearchResult, getCurrentResultType, getLastSearch } from '../selectors/search'
-import { doSearch } from '../actions/search'
+import { doSearch, loadMore } from '../actions/search'
 import SearchResultViewer from '../components/SearchResultViewer'
 
 class SearchContainer extends Component {
   render() {
-    const { doSearch, result, resultType, lastSearch } = this.props
+    const { doSearch, result, resultType, lastSearch, loadMore } = this.props
 
     return(
       <div>
@@ -17,7 +17,7 @@ class SearchContainer extends Component {
         result && 
         <div>
           <SearchMenuBar></SearchMenuBar>
-          <SearchResultViewer result={result} resultType={resultType}></SearchResultViewer>
+          <SearchResultViewer result={result} resultType={resultType} onLoadMore={loadMore}></SearchResultViewer>
         </div>
         }
       </div>
@@ -32,5 +32,6 @@ const mapStateToProps = (state) => ({
 })
 
 export default connect(mapStateToProps, {
-  doSearch
+  doSearch,
+  loadMore
 })(SearchContainer)
