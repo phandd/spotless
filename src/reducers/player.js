@@ -1,4 +1,5 @@
 import { PLAYER as actionTypes } from '../constants/actionTypes'
+import { TRACK as trackActionTypes } from '../constants/actionTypes'
 
 const defaultState = {
   playback: null,
@@ -54,6 +55,54 @@ export default (state = defaultState, action) => {
           "repeat_state": action.repeatState
         }
       }
+
+    case trackActionTypes.CHECK_TRACK_IS_FAVORITED_SUCCESS:
+      return {
+        ...state,
+        playback: {
+          ...state.playback,
+          item: {
+            ...state.playback.item,
+            "is_favorite": action.response[0]
+          }
+        }
+      }
+
+    case trackActionTypes.TOGGLE_FAVORITE_SUCCESS:
+      return {
+        ...state,
+        playback: {
+          ...state.playback,
+          item: {
+            ...state.playback.item,
+            "is_favorite": !state.playback.item["is_favorite"]
+          }
+        }
+      }
+
+    case actionTypes.SET_VOLUME_REQUEST:
+      return {
+        ...state,
+        playback: {
+          ...state.playback,
+          device: {
+            ...state.playback.device,
+            "volume_percent": action.to
+          }
+        }
+      }
+
+      // case actionTypes.SET_VOLUME_FAILURE:
+      // return {
+      //   ...state,
+      //   playback: {
+      //     ...state.playback,
+      //     device: {
+      //       ...state.playback.device,
+      //       "volume_percent": action.from
+      //     }
+      //   }
+      // }
 
     default:
       return state
