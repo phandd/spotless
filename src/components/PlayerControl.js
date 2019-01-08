@@ -5,29 +5,61 @@ const PlayerControl = ({
   repeat,
   shuffle,
   playing,
+  favorite,
+  volume,
   onTogglePlay,
   onToggleShuffle,
   onSetRepeatMode,
   onSkipNext,
-  onSkipPrevious
+  onSkipPrevious,
+  onToggleTrackFavorite,
+  onSetVolume
 }) => {
+  let volumeInput = React.createRef()
+  let volumeProgressBar = React.createRef()
+
+  function handleMouseUp() {
+     onSetVolume(volumeInput.current.value)
+  }
+
+  function onInput(e) {
+    volumeProgressBar.current.style = `width: ${e.target.value}%`
+  }
+
+
   return(
     <div className='player-control'>
-      <button className={ 'control-button icon-shuffle ' + (shuffle ? 'active' : '') }
-              onClick={onToggleShuffle}>
-      </button>
-      <button className='control-button icon-skip-back'
-              onClick={onSkipPrevious}>
-      </button>
-      <button className={ 'control-button ' + (playing ? 'icon-pause' : 'icon-play') }
-              onClick={onTogglePlay}>
-      </button>
-      <button className='control-button icon-skip-forward'
-              onClick={onSkipNext}>
-      </button>
-      <button className={ 'control-button icon-repeat-' + repeat + (repeat === 'off' ? '' : ' active') }
-              onClick={onSetRepeatMode}>
-      </button>
+      <div>
+        <button className={ 'control-button icon-shuffle ' + (shuffle ? 'active' : '') }
+                onClick={onToggleShuffle}>
+        </button>
+        <button className='control-button icon-skip-back'
+                onClick={onSkipPrevious}>
+        </button>
+        <button className={ 'control-button ' + (playing ? 'icon-pause' : 'icon-play') }
+                onClick={onTogglePlay}>
+        </button>
+        <button className='control-button icon-skip-forward'
+                onClick={onSkipNext}>
+        </button>
+        <button className={ 'control-button icon-repeat-' + repeat + (repeat === 'off' ? '' : ' active') }
+                onClick={onSetRepeatMode}>
+        </button>
+      </div>
+      <div className="extended-controls">
+        <button className={ 'control-button icon-heart ' + (favorite ? 'active' : '') }
+                onClick={onToggleTrackFavorite}>
+        </button>
+        <div className="volume-bar">
+           <button className="control-button icon-volume"></button>
+           <div className="progress-bar" onMouseUp={handleMouseUp}>
+              <div className="progress-bar-wrapper">
+                <div className="progress-bar-fg" style={{"width": `${volume}%`}} ref={volumeProgressBar}></div>
+                <input className="progress-bar-bg" type="range" min="0" max="100" ref={volumeInput} defaultValue={volume} onInput={onInput}/>
+              </div>
+           </div>
+        </div>
+      </div>
     </div>
   )
 }

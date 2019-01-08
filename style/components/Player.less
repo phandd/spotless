@@ -12,3 +12,62 @@
 .player-player-control {
   margin-top: 25px;
 }
+
+.extended-controls {
+  display: flex;
+
+  .volume-bar {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+
+    .progress-bar {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      background-color: #404040;
+      margin-right: 25px;
+    }
+
+    .progress-bar-bg {
+      margin: 0;
+      flex-grow: 1;
+      height: 4px;
+      background-color: transparent;
+      -webkit-appearance: none;
+      outline: none;
+      z-index: 100;
+    }
+
+    .progress-bar-wrapper {
+      flex-grow: 1;
+      position: relative;
+      display: flex;
+    }
+
+    .progress-bar-fg {
+      position: absolute;
+      height: 4px;
+      background-color: @default-text-color;
+      top: 0;
+      left: 0;
+      z-index: 10;
+    }
+  }
+}
+
+.progress-bar-bg::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: white;
+}
+
+.progress-bar-bg::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-radius: 50%;
+}

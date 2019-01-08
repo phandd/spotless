@@ -9,5 +9,6 @@ export default {
   skipNext: () => '/me/player/next',
   skipPrevious: () => '/me/player/previous',
   play: () => '/me/player/play',
-  pause: () => '/me/player/pause'
+  pause: () => '/me/player/pause',
+  setVolumeEndpoint: percent => `/me/player/volume?volume_percent=${percent}`
 }

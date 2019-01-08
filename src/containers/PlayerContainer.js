@@ -7,8 +7,10 @@ import {
   onToggleShuffle,
   onSetRepeatMode,
   onSkipNext,
-  onSkipPrevious
+  onSkipPrevious,
+  onSetVolume
 } from '../actions/player'
+import { onToggleTrackFavorite } from '../actions/track'
 import { getPlayerControlState, getPlayingTrackData } from '../selectors/player';
 
 class PlayerContainer extends Component {
@@ -38,5 +40,7 @@ export default connect(mapStateToProps, {
   onToggleShuffle,
   onSetRepeatMode,
   onSkipNext,
-  onSkipPrevious
+  onSkipPrevious,
+  onToggleTrackFavorite,
+  onSetVolume
 })(PlayerContainer)

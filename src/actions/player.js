@@ -1,6 +1,7 @@
 import { callApiThunk } from '../utils/api'
 import playerEndpointGetters from '../endpoints/player'
 import { PLAYER as actionTypes } from '../constants/actionTypes';
+import { checkTrackIsFavorited } from './track'
 
 // A thunk to fetch available devices
 const _fetchAvailableDevices = () => dispatch => {
@@ -45,14 +46,17 @@ export const fetchPlayerData = () => (dispatch, getState) => {
       return Promise.resolve()
     })
     // Timeout is needed because transfer playback is done a bit slow by Spotify despite that it already returns 204
-    .then(() => setTimeout(() => {
-        return dispatch(callApiThunk({
+    .then(() => new Promise((resolve, reject) => {
+      setTimeout(() => {
+        dispatch(callApiThunk({
           endpoint: playerEndpointGetters.getPlaybackDataEndpoint(),
           method: 'GET',
           types: [ actionTypes.FETCH_PLAYBACK_DATA_REQUEST, actionTypes.FETCH_PLAYBACK_DATA_SUCCESS, actionTypes.FETCH_PLAYBACK_DATA_FAILURE ]
         }))
+        .then(() => resolve())
       }, 1000)
-    )
+    }))
+    .then(() => dispatch(checkTrackIsFavorited(getState().player.playback.item.id)))
 }
 
 export const onTogglePlay = () => (dispatch, getState) => {
@@ -165,5 +169,16 @@ export const pause = () => dispatch => {
     endpoint: playerEndpointGetters.pausePlaybackEndpoint(),
     method: 'PUT',
     types: [ actionTypes.PAUSE_PLAYBACK_REQUEST, actionTypes.PAUSE_PLAYBACK_SUCCESS, actionTypes.PAUSE_PLAYBACK_FAILURE ]
+  }))
+}
+
+export const onSetVolume = percent => (dispatch, getState) => {
+  return dispatch(callApiThunk({
+    endpoint: playerEndpointGetters.setVolumeEndpoint(percent),
+    method: 'PUT',
+    types: [ actionTypes.SET_VOLUME_REQUEST, actionTypes.SET_VOLUME_SUCCESS, actionTypes.SET_VOLUME_FAILURE ]
+  }, {
+    from: +getState().player.playback.device["volume_percent"],
+    to: +percent
   }))
 }
