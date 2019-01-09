@@ -1,17 +1,18 @@
 import { createSelector } from 'reselect'
 
 export const getPlayback = state => state.player.playback
-export const getCoverArtUrl = createSelector(getPlayback, playback => playback ? playback.item.album.images[0].url : null)
-export const getTrackName = createSelector(getPlayback, playback => playback ? playback.item.name : null)
-export const getArtists = createSelector(getPlayback, playback => {
-  if (!playback) {
+export const getPlaybackItem = state => state.player.playback ? state.player.playback.item : null
+export const getCoverArtUrl = createSelector(getPlaybackItem, playbackItem => playbackItem ? playbackItem.album.images[0].url : null)
+export const getTrackName = createSelector(getPlaybackItem, playbackItem => playbackItem ? playbackItem.name : null)
+export const getArtists = createSelector(getPlaybackItem, playbackItem => {
+  if (!playbackItem) {
     return null
   }
 
-  return playback.item.artists.reduce((artists, artist, currentIndex) => artists += currentIndex === 0 ? `${artist.name}` : `, ${artist.name}`, '')
+  return playbackItem.artists.reduce((artists, artist, currentIndex) => artists += currentIndex === 0 ? `${artist.name}` : `, ${artist.name}`, '')
 })
 
-export const getFavoriteStatus = createSelector(getPlayback, playback => playback ? playback.item["is_favorite"] : null)
+export const getFavoriteStatus = createSelector(getPlaybackItem, playbackItem => playbackItem ? playbackItem["is_favorite"] : null)
 export const getVolumePercentage = createSelector(getPlayback, playback => playback ? playback.device["volume_percent"] : null)
 
 export const getPlayingTrackData = createSelector(getPlayback, getCoverArtUrl, getTrackName, getArtists, (playingTrack, coverArtUrl, trackName, artists) => {
@@ -35,5 +36,3 @@ export const getPlayerControlState = createSelector(getPlayback, getFavoriteStat
     volume
   }
 })
-
-export const getPlaybackItem = state => state.player.playback ? state.player.playback.item : null
