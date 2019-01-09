@@ -56,7 +56,7 @@ export const fetchPlayerData = () => (dispatch, getState) => {
         .then(() => resolve())
       }, 1000)
     }))
-    .then(() => dispatch(checkTrackIsFavorited(getState().player.playback.item.id)))
+    .then(() => getState().player.playback.item && dispatch(checkTrackIsFavorited(getState().player.playback.item.id)))
 }
 
 export const onTogglePlay = () => (dispatch, getState) => {
