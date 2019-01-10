@@ -15,9 +15,7 @@ import { getPlayerControlState, getPlayingTrackData } from '../selectors/player'
 
 class PlayerContainer extends Component {
   componentDidMount() {
-    const { fetchPlayerData } = this.props
-
-    fetchPlayerData()
+    this.props.fetchPlayerData();
   }
 
   render() {

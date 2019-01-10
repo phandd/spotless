@@ -6,7 +6,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --mode development --hot",
-    "build": "webpack --mode production"
+    "build-popup": "webpack --config ./popup/webpack.config.js --mode production",
+    "build-background": "webpack --config ./background/webpack.config.js --mode development",
+    "build-popup-dev": "webpack --config ./popup/webpack.config.js --mode production",
+    "build-background-dev": "webpack --config ./background/webpack.config.js --mode development",
+    "build": "npm run build-popup && npm run build-background && npm run copy-manifest",
+    "build-dev": "npm run build-popup-dev && npm run build-background-dev",
+    "copy-manifest": "cp ./manifest.json ./dist"
   },
   "author": "Dang Dien (ddphan)",
   "license": "ISC",
@@ -33,6 +39,7 @@
     "normalizr": "^3.3.0",
     "prop-types": "^15.6.2",
     "react": "^16.5.2",
+    "react-chrome-redux": "^2.0.0-alpha.4",
     "react-dom": "^16.5.2",
     "react-redux": "^5.0.7",
     "redux": "^4.0.1",

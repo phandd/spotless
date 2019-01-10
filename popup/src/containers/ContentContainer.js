@@ -33,12 +33,10 @@ const ContentContainer = ({ selectedMenubarItem }) => {
 }
 
 
-const mapStateToProps = (state) => ({
-  selectedMenubarItem: state.menubar.selectedMenubarItem
-})
-
-ContentContainer.propTypes = {
-  selectedMenubarItem: PropTypes.string.isRequired,
+const mapStateToProps = (state) => {
+  return {
+    selectedMenubarItem: state.menubar.selectedMenubarItem
+  }
 }
 
 export default connect(
