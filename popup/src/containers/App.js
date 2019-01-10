@@ -11,7 +11,7 @@ class App extends Component {
   render() {
 
     return (
-      <div>
+      <div class="container">
         <SpotifyLogo />
         <Menubar />
         <ContentContainer />

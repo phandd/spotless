@@ -2,7 +2,7 @@ import { normalize } from 'normalizr'
 import axios from 'axios'
 
 const API_ROOT = 'https://api.spotify.com/v1'
-const access_token = 'BQCriQmE31nW5kbJdHK1AdRvsoKHAEcRmnkkVbjMb-tzF5v4jIQ6bytA9DS2X68SW-XRCPdf8Bx6G6yVdD_k3BRVF_cvPPC71lidHyfe9cCTvXkvODntBHHnDc0LZFlVdvteToZCy_MeM8zk-xcnpJEcQodGf_5jpiqeazQu8QpqEla_EsRYze-02d_4feseVyi1Gj57JjP3F6nWqOFkC2TMJJRd3Da4H-QwtAKxmlr6OKbYhkszp2uCw_5ehpRXpgaSb8Efz89VhKv70o-fYAYlXYDSURYIXAVjwFpMYUjDtA'
+const access_token = 'BQA95RZP55zb8UNBZ5fkJYx0-y5nI6yAn1eLLwSF1WcER2OKs_OXGMcsHwiWez9N0qVQL9v4h-2J4_bnOjv9zxHIue1_NSjEK04GJqMFXnBtRLvn2SjtfSLSVs8Mg3pbKGAEijNfpRhH1yknpuiWWSZ49okuQuuhNCFy_fPyMnPe-uphbJ8PajDAfD5PSbA_OkF8mxPTM5dIdGUgeCjoe6MbwMQAQo-n2Tom46g3bvq2wFaAB0eY-kyMsvtMxKDihZ26-k8VhGTnCD7PglA2SmWyeHZyF4pZxyj-bUfKDLagxQ'
 
 // API call thunk, this is a function that accepts
 // an options parameter as the options to call API,
