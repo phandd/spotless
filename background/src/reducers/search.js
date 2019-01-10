@@ -1,6 +1,6 @@
 import { SEARCH_TYPES } from '../constants/search';
 import { SEARCH as actionTypes } from '../constants/actionTypes'
-import { union, merge } from 'lodash'
+import { union } from 'lodash'
 
 const defaultState = {
   selectedSeachMenuBarItem: SEARCH_TYPES.TRACKS,

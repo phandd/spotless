@@ -1,6 +1,7 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+  entry: "./popup/src/index.js",
   module: {
     rules: [
       {
@@ -58,9 +59,9 @@ module.exports = {
       }
     ]
   },
-  devtool: "eval-source-map",
+  devtool: "inline-source-map",
   plugins: [new HtmlWebPackPlugin({
-    template: './public/index.html',
-    filename: 'index.html'
+    template: './popup/public/index.html',
+    filename: 'popup.html'
   })]
 };
