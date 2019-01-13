@@ -10,6 +10,7 @@ import {
   onSkipPrevious,
   onSetVolume
 } from '../actions/player'
+import { getTokenFromCookie } from '../actions/auth'
 import { onToggleTrackFavorite } from '../actions/track'
 import { getPlayerControlState, getPlayingTrackData } from '../selectors/player';
 
@@ -33,6 +34,7 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {
+  getTokenFromCookie,
   fetchPlayerData,
   onTogglePlay,
   onToggleShuffle,
