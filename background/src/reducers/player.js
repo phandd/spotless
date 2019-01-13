@@ -3,8 +3,9 @@ import { TRACK as trackActionTypes } from '../constants/actionTypes'
 
 const defaultState = {
   playback: null,
-  availableDevices: [],
-  activeDevice: null
+  availableDevices: null,
+  activeDevice: null,
+  loading: true
 }
 
 export default (state = defaultState, action) => {
@@ -92,17 +93,17 @@ export default (state = defaultState, action) => {
         }
       }
 
-      // case actionTypes.SET_VOLUME_FAILURE:
-      // return {
-      //   ...state,
-      //   playback: {
-      //     ...state.playback,
-      //     device: {
-      //       ...state.playback.device,
-      //       "volume_percent": action.from
-      //     }
-      //   }
-      // }
+      case actionTypes.PLAYER_LOAD_LOADING:
+        return {
+          ...state,
+          loading: true
+        }
+
+      case actionTypes.PLAYER_LOAD_DONE:
+        return {
+          ...state,
+          loading: false
+        }
 
     default:
       return state

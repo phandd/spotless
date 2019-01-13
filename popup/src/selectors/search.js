@@ -21,7 +21,7 @@ export const getSearchItemCoverArtUrl = () => createSelector(getSearchItem, sear
 });
 export const getSearchItemUri = createSelector(getSearchItem, searchItem => searchItem ? searchItem.uri : null)
 export const getSearchItemPlayingStatus = () => createSelector(getSearchItem, getPlayback, getPlayerControlState, (searchItem, playback, playerStates) => {
-  if (!playerStates.playing) {
+  if (!playerStates || !playerStates.playing) {
     return false
   }
   // if playback.context exist, means the playback

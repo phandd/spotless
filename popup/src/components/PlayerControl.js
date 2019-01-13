@@ -55,7 +55,7 @@ const PlayerControl = ({
            <div className="progress-bar" onMouseUp={handleMouseUp}>
               <div className="progress-bar-wrapper">
                 <div className="progress-bar-fg" style={{"width": `${volume}%`}} ref={volumeProgressBar}></div>
-                <input className="progress-bar-bg" type="range" min="0" max="100" value={volume} ref={volumeInput} onInput={onInput}/>
+                <input className="progress-bar-bg" type="range" min="0" max="100" defaultValue={volume} ref={volumeInput} onInput={onInput}/>
               </div>
            </div>
         </div>

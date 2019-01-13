@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import Player from '../components/Player'
+import NoDevice from '../components/NoDevice'
+import Loading from '../components/Loading'
 import { connect } from 'react-redux'
 import {
   fetchPlayerData,
@@ -12,7 +14,7 @@ import {
 } from '../actions/player'
 import { getTokenFromCookie } from '../actions/auth'
 import { onToggleTrackFavorite } from '../actions/track'
-import { getPlayerControlState, getPlayingTrackData } from '../selectors/player';
+import { getPlayerControlState, getPlayingTrackData, getDeviceAvailability, getLoadingStatus } from '../selectors/player';
 
 class PlayerContainer extends Component {
   componentDidMount() {
@@ -20,8 +22,24 @@ class PlayerContainer extends Component {
   }
 
   render() {
+    const { playingTrackData, noDevice, loading } = this.props
+
+    if (noDevice) {
+      return(
+        <div>
+           <Loading loading={loading} />
+           <NoDevice />
+        </div>
+      )
+    }
+
     return (
-      this.props.playingTrackData ? <Player {...this.props}/> : null
+      <div>
+        <Loading loading={loading}/>
+        {
+          playingTrackData ? <Player {...this.props}/> : null
+        }
+      </div>
     )
   }
 }
@@ -29,7 +47,9 @@ class PlayerContainer extends Component {
 const mapStateToProps = (state) => {
   return {
     playingTrackData: getPlayingTrackData(state),
-    playerControlState: getPlayerControlState(state)
+    playerControlState: getPlayerControlState(state),
+    noDevice: !getDeviceAvailability(state),
+    loading: getLoadingStatus(state),
   }
 }
 
