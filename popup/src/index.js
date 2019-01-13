@@ -18,4 +18,3 @@ storeWithMiddleware.ready().then(() => {
     document.getElementById('root')
   )
 })
-
