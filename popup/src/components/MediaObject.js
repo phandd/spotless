@@ -6,10 +6,10 @@ const MediaObject = ({ coverArtUrl, trackName, artists }) => {
       <div className='cover-art' style={{"backgroundImage" : `url(${coverArtUrl || "../../public/images/default.png"})`}} />
       <div className='media-info'>
         <div className='info-name'>
-          <span>{trackName}</span>
+          <span title={trackName}>{trackName}</span>
         </div>
         <div className='info-meta'>
-        <span>{artists}</span>
+        <span title={artists}>{artists}</span>
         </div>
       </div>
     </div>

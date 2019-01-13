@@ -8,6 +8,9 @@
 @import "components/MediaListItem";
 @import "components/SearchMenuBar";
 @import "components/SearchResultViewer";
+@import "components/Login";
+@import "components/NoDevice";
+@import "components/Loading";
 
 @font-face {
   font-family: Spotify Circular Light;
@@ -131,12 +134,17 @@ body {
   background-color: @page-background;
   color: @default-text-color;
   font-family: "Spotify Circular Light";
+  margin: 0;
 }
 
 .container {
   width: 290px;
-  height: 490px;
   overflow: hidden;
+}
+
+.content {
+  height: 350px;
+  position: relative;
 }
 
 ::-webkit-scrollbar {

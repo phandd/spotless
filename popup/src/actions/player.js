@@ -1,6 +1,8 @@
 import { callApiThunk } from '../utils/api'
 import playerEndpointGetters from '../endpoints/player'
-import { PLAYER as actionTypes } from '../constants/actionTypes';
+import { PLAYER as actionTypes, AUTH as authActionTypes } from '../constants/actionTypes';
+import { MENUBAR_ITEMS } from '../constants/menubar'
+import { switchMenu } from './menubar'
 import { checkTrackIsFavorited } from './track'
 
 // A thunk to fetch available devices
@@ -24,6 +26,8 @@ const _fetchAvailableDevices = () => dispatch => {
 // Same with fetch playing track, it only being called
 // when there's an activating device
 export const fetchPlayerData = () => (dispatch, getState) => {
+  dispatch({ type: actionTypes.PLAYER_LOAD_LOADING })
+
   dispatch(_fetchAvailableDevices())
     .then(() => {
       if (!getState().player.availableDevices.length) {
@@ -57,6 +61,7 @@ export const fetchPlayerData = () => (dispatch, getState) => {
       }, 1000)
     }))
     .then(() => getState().player.playback.item && dispatch(checkTrackIsFavorited(getState().player.playback.item.id)))
+    .finally(() => dispatch({ type: actionTypes.PLAYER_LOAD_DONE }))
 }
 
 export const onTogglePlay = () => (dispatch, getState) => {
@@ -155,13 +160,7 @@ export const play = item => dispatch => {
   }, {
     item
   }))
-  .then(setTimeout(() => {
-    return dispatch(callApiThunk({
-      endpoint: playerEndpointGetters.getPlaybackDataEndpoint(),
-      method: 'GET',
-      types: [ actionTypes.FETCH_PLAYBACK_DATA_REQUEST, actionTypes.FETCH_PLAYBACK_DATA_SUCCESS, actionTypes.FETCH_PLAYBACK_DATA_FAILURE ]
-    }))
-  }, 1000))
+  .finally(() => dispatch(switchMenu(MENUBAR_ITEMS.PLAYER))) // Switch to player if success to play an item
 }
 
 export const pause = () => dispatch => {

@@ -3,6 +3,7 @@ import axios from 'axios'
 import 'babel-polyfill'
 import { getTokenFromCookie } from '../actions/auth'
 import { renewSpotifyToken } from './auth';
+import { AUTH as authActionTypes } from '../constants/actionTypes'
 
 
 const API_ROOT = 'https://api.spotify.com/v1'
@@ -90,7 +91,12 @@ export const callApiThunk = (options, data) => async (dispatch, getState) => {
       // logged in on https://open.spotify.com.
 
       if (!authenticated) {
-        return Promise.reject('Not logging in')
+        // User is not logged in
+        dispatch({
+          type: authActionTypes.LOG_OUT
+        })
+
+        return Promise.reject('User is not logged in')
       }
 
       try {

@@ -36,3 +36,7 @@ export const getPlayerControlState = createSelector(getPlayback, getFavoriteStat
     volume
   }
 })
+
+export const getAvailableDevices = state => state.player.availableDevices
+export const getDeviceAvailability = createSelector(getAvailableDevices, availableDevices => availableDevices ? availableDevices.length : true)
+export const getLoadingStatus = state => state.player.loading
