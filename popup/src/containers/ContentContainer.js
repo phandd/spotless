@@ -16,7 +16,11 @@ class ContentContainer extends Component {
     const { loginState, selectedMenubarItem } = this.props
 
     if (!loginState) {
-      return (<Login />)
+      return (
+        <div className="content">
+          <Login />
+        </div>
+      )
     }
   
     let content;
