@@ -7,10 +7,10 @@ const MediaObject = ({ coverArtUrl, trackName, artists }) => {
       <div className='cover-art' style={{"backgroundImage" : `url(${coverArtUrl || defaultCoverArtUrl})`}} />
       <div className='media-info'>
         <div className='info-name'>
-          <span title={trackName}>{trackName}</span>
+          <span title={trackName}>{trackName || "Cannot load playing track"}</span>
         </div>
         <div className='info-meta'>
-        <span title={artists}>{artists}</span>
+        <span title={artists}>{artists || "Media type is not supported"}</span>
         </div>
       </div>
     </div>
