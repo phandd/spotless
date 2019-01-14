@@ -6,7 +6,7 @@ const SearchResultViewer = ({ result, resultType, onLoadMore }) => {
   const items = result ? result.items.map(itemId => <SearchResultItemContainer id={itemId} type={resultType} key={itemId}/>) : [];
 
   return (
-    <div class="search-result">
+    <div className="search-result">
       <div className="search-result-viewer">
         {items}
       </div>
