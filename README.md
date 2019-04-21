@@ -3,8 +3,10 @@ Spotless is a Chrome extension allows you to control your Spotify player, search
 
  ![spotless_demo](https://user-images.githubusercontent.com/20087095/56460697-eeaa5b00-63d0-11e9-9725-1f50075a0a3b.gif)
 
-## Getting started
+## Installation
+The extension is available on [Chrome Store](https://chrome.google.com/webstore/detail/spotless/allccgoelledmdfenijoodhcfjndddjh)
 
+## Getting started
 You can download the packed `.crx` version to install to your Chrome browser or build one yourself.
 
 ### To use packed version:
