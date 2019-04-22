@@ -32,7 +32,7 @@ then you're good to go!
 
 ## Usage
  - This extension only compatible with Spotify web app and desktop app. It also requires you to login to Spotify on web app to be able to use your cookies.
- - You need at least one available device running Spotify (either web app player or desktop app player) to use the extension, which makes sense, you wouldn't be able to listen to music if you don't have any device openning Spotify, the extensions cannot play music itself, it's a controller.
+ - You need at least one available device running Spotify (either web app player or desktop app player) to use the extension, which makes sense, you wouldn't be able to listen to music if you don't have any device opening Spotify, the extensions cannot play music itself, it's a controller.
  - Controlling mobile device is a feature for Spotify Premium users, this extensions will not work with mobile device unless you're Spotify Premium user.
  
 ## Tech stack
