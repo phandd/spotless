@@ -4,9 +4,18 @@ import logger from 'redux-logger'
 import thunk from 'redux-thunk'
 import rootReducer from './reducers'
 
-const store = createStore(
-  rootReducer,
-  applyMiddleware(thunk, logger)
-)
+let store
+
+if (process.env.NODE_ENV === 'production') {
+  store = createStore(
+    rootReducer,
+    applyMiddleware(thunk)
+  )
+} else {
+  store = createStore(
+    rootReducer,
+    applyMiddleware(thunk, logger)
+  )
+}
 
 wrapStore(store, { portName: 'spotless' });
