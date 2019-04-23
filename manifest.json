@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Spotless",
   "description": "Effortless Spotify",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "background": {
     "scripts": [
       "background.js"
@@ -14,8 +14,19 @@
     "default_popup": "popup.html"
   },
   "permissions": [
-    "tabs",
     "cookies",
-    "*://*/*"
+    "https://open.spotify.com/",
+    "https://spotify.com/"
+  ],
+  "icons": {
+    "128": "icon-128.png",
+    "16": "icon-16.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://open.spotify.com/*"],
+      "run_at": "document_end",
+      "js": ["content-script.js"]
+    }
   ]
 }
