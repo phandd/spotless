@@ -10,9 +10,12 @@
     "build-background": "webpack --config ./background/webpack.prod.js --mode production",
     "build-popup-dev": "webpack --config ./popup/webpack.config.js --mode development",
     "build-background-dev": "webpack --config ./background/webpack.config.js --mode development",
-    "build": "npm run build-popup && npm run build-background && npm run copy-manifest",
-    "build-dev": "npm run build-popup-dev && npm run build-background-dev",
-    "copy-manifest": "cp ./manifest.json ./dist"
+    "build-content-dev": "webpack --config ./content-script/webpack.config.js --mode development",
+    "build-content": "webpack --config ./content-script/webpack.prod.js --mode production",
+    "build": "npm run build-popup && npm run build-background && npm run build-content && npm run copy-manifest && npm run copy-images",
+    "build-dev": "npm run build-popup-dev && npm run build-background-dev && npm run build-content-dev && npm run copy-manifest && npm run copy-images",
+    "copy-manifest": "cp ./manifest.json ./dist",
+    "copy-images": "cp ./public/images/* ./dist"
   },
   "author": "Dang Dien (ddphan)",
   "license": "ISC",
