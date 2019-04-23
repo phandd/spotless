@@ -13,7 +13,8 @@ const PlayerControl = ({
   onSkipNext,
   onSkipPrevious,
   onToggleTrackFavorite,
-  onSetVolume
+  onSetVolume,
+  onVolumeMuteToggle
 }) => {
   let volumeInput = React.createRef()
   let volumeProgressBar = React.createRef()
@@ -51,7 +52,8 @@ const PlayerControl = ({
                 onClick={onToggleTrackFavorite}>
         </button>
         <div className="volume-bar">
-           <button className="control-button icon-volume"></button>
+           <button className={ 'control-button ' + (volume === 0 ? 'icon-volume-off' : 'icon-volume')} 
+                   onClick={onVolumeMuteToggle}></button>
            <div className="progress-bar" onMouseUp={handleMouseUp}>
               <div className="progress-bar-wrapper">
                 <div className="progress-bar-fg" style={{"width": `${volume}%`}} ref={volumeProgressBar}></div>

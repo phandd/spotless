@@ -10,7 +10,8 @@ import {
   onSetRepeatMode,
   onSkipNext,
   onSkipPrevious,
-  onSetVolume
+  onSetVolume,
+  onVolumeMuteToggle
 } from '../actions/player'
 import { getTokenFromCookie } from '../actions/auth'
 import { onToggleTrackFavorite } from '../actions/track'
@@ -62,5 +63,6 @@ export default connect(mapStateToProps, {
   onSkipNext,
   onSkipPrevious,
   onToggleTrackFavorite,
-  onSetVolume
+  onSetVolume,
+  onVolumeMuteToggle
 })(PlayerContainer)

@@ -11,7 +11,7 @@ const defaultState = {
 export default (state = defaultState, action) => {
   switch (action.type) {
     case actionTypes.FETCH_PLAYBACK_DATA_SUCCESS:
-      return { ...state, playback: action.response }
+      return { ...state, playback: { ...action.response, device: { ...action.response.device, "previous_volume_percent": action.response.device["volume_percent"] }}}
 
     case actionTypes.FETCH_AVAILABLE_DEVICES_SUCCESS:
       const activeDevice = action.response.find(device => device["is_active"])
@@ -82,28 +82,35 @@ export default (state = defaultState, action) => {
       }
 
     case actionTypes.SET_VOLUME_REQUEST:
-      return {
-        ...state,
-        playback: {
-          ...state.playback,
-          device: {
-            ...state.playback.device,
-            "volume_percent": action.to
-          }
+      const mute = action.to === 0 ? true : false
+      const playback = {
+        ...state.playback,
+        device: {
+          ...state.playback.device,
+          "volume_percent": action.to
         }
       }
 
-      case actionTypes.PLAYER_LOAD_LOADING:
-        return {
-          ...state,
-          loading: true
-        }
+      if (mute) {
+        playback.device["previous_volume_percent"] = action.from
+      }
 
-      case actionTypes.PLAYER_LOAD_DONE:
-        return {
-          ...state,
-          loading: false
-        }
+      return {
+        ...state,
+        playback
+      }
+
+    case actionTypes.PLAYER_LOAD_LOADING:
+      return {
+        ...state,
+        loading: true
+      }
+
+    case actionTypes.PLAYER_LOAD_DONE:
+      return {
+        ...state,
+        loading: false
+      }
 
     default:
       return state
