@@ -168,7 +168,13 @@ export const play = item => dispatch => {
   }, {
     item
   }))
-  .finally(() => dispatch(switchMenu(MENUBAR_ITEMS.PLAYER))) // Switch to player if success to play an item
+  .finally(() => {
+    setTimeout(() => {
+      // Switch to player if success to play an item,
+      // need timeout because Spotify api is delayed
+      dispatch(switchMenu(MENUBAR_ITEMS.PLAYER))
+    }, 500);
+  })
 }
 
 export const pause = () => dispatch => {
