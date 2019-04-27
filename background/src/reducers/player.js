@@ -12,7 +12,12 @@ const defaultState = {
 export default (state = defaultState, action) => {
   switch (action.type) {
     case actionTypes.FETCH_PLAYBACK_DATA_SUCCESS:
-      return { ...state, playback: action.response }
+      return {
+        ...state,
+        playback: action.response,
+        availableDevices: [action.response.device],
+        activeDevice: action.response.device
+       }
 
     case actionTypes.FETCH_AVAILABLE_DEVICES_SUCCESS:
       const activeDevice = action.response.find(device => device["is_active"])

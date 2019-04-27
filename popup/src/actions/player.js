@@ -5,6 +5,8 @@ import { MENUBAR_ITEMS } from '../constants/menubar'
 import { switchMenu } from './menubar'
 import { checkTrackIsFavorited } from './track'
 
+const DELAY_TIME = 800
+
 // A thunk to fetch available devices
 const _fetchAvailableDevices = () => dispatch => {
   return dispatch(callApiThunk({
@@ -43,7 +45,7 @@ export const fetchPlayerData = () => (dispatch, getState) => {
             setTimeout(() => {
               dispatch(_fetchPlaybackData())
                 .then(() => resolve())
-            }, 500)
+            }, DELAY_TIME)
           }))
       }
     })
@@ -126,7 +128,7 @@ export const onSkipNext = () => (dispatch) => {
         types: [ actionTypes.FETCH_PLAYBACK_DATA_REQUEST, actionTypes.FETCH_PLAYBACK_DATA_SUCCESS, actionTypes.FETCH_PLAYBACK_DATA_FAILURE ]
       }))
       .then(() => dispatch({ type: actionTypes.TRACK_INFO_LOAD_DONE }))
-    }, 500))
+    }, DELAY_TIME))
 }
 
 export const onSkipPrevious = () => (dispatch) => {
@@ -144,7 +146,7 @@ export const onSkipPrevious = () => (dispatch) => {
         types: [ actionTypes.FETCH_PLAYBACK_DATA_REQUEST, actionTypes.FETCH_PLAYBACK_DATA_SUCCESS, actionTypes.FETCH_PLAYBACK_DATA_FAILURE ]
       }))
       .then(() => dispatch({ type: actionTypes.TRACK_INFO_LOAD_DONE }))
-    }, 500))
+    }, DELAY_TIME))
 }
 
 export const play = item => dispatch => {
@@ -179,7 +181,7 @@ export const play = item => dispatch => {
       // Switch to player if success to play an item,
       // need timeout because Spotify api is delayed
       dispatch(switchMenu(MENUBAR_ITEMS.PLAYER))
-    }, 500);
+    }, DELAY_TIME);
   })
 }
 
