@@ -12,6 +12,9 @@ const Login = () => {
     <div className="login">
       <span>Looks like you're not logged in</span>
       <button onClick={onLogin}>Log in</button>
+      <div className="login-helper">
+        <span>Tip: Use Spotify Web player to mute ads</span>
+      </div>
     </div>
   )
 }
