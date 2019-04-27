@@ -15,7 +15,7 @@ import {
 } from '../actions/player'
 import { getTokenFromCookie } from '../actions/auth'
 import { onToggleTrackFavorite } from '../actions/track'
-import { getPlayerControlState, getPlayingTrackData, getDeviceAvailability, getLoadingStatus } from '../selectors/player';
+import { getPlayerControlState, getPlayingTrackData, getDeviceAvailability, getLoadingStatus, getTrackInfoLoadingStatus } from '../selectors/player';
 
 class PlayerContainer extends Component {
   componentDidMount() {
@@ -23,7 +23,7 @@ class PlayerContainer extends Component {
   }
 
   render() {
-    const { playingTrackData, noDevice, loading } = this.props
+    const { playingTrackData, noDevice, loading, trackInfoLoading } = this.props
 
     if (noDevice) {
       return(
@@ -51,6 +51,7 @@ const mapStateToProps = (state) => {
     playerControlState: getPlayerControlState(state),
     noDevice: !getDeviceAvailability(state),
     loading: getLoadingStatus(state),
+    trackInfoLoading: getTrackInfoLoadingStatus(state)
   }
 }
 

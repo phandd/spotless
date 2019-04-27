@@ -112,6 +112,8 @@ export const onSetRepeatMode = () => (dispatch, getState) => {
 }
 
 export const onSkipNext = () => (dispatch) => {
+  dispatch({ type: actionTypes.TRACK_INFO_LOADING })
+
   return dispatch(callApiThunk({
     endpoint: playerEndpointGetters.skipNext(),
     method: 'POST',
@@ -123,10 +125,13 @@ export const onSkipNext = () => (dispatch) => {
         method: 'GET',
         types: [ actionTypes.FETCH_PLAYBACK_DATA_REQUEST, actionTypes.FETCH_PLAYBACK_DATA_SUCCESS, actionTypes.FETCH_PLAYBACK_DATA_FAILURE ]
       }))
-    }, 1000))
+      .then(() => dispatch({ type: actionTypes.TRACK_INFO_LOAD_DONE }))
+    }, 500))
 }
 
 export const onSkipPrevious = () => (dispatch) => {
+  dispatch({ type: actionTypes.TRACK_INFO_LOADING })
+
   return dispatch(callApiThunk({
     endpoint: playerEndpointGetters.skipPrevious(),
     method: 'POST',
@@ -138,7 +143,8 @@ export const onSkipPrevious = () => (dispatch) => {
         method: 'GET',
         types: [ actionTypes.FETCH_PLAYBACK_DATA_REQUEST, actionTypes.FETCH_PLAYBACK_DATA_SUCCESS, actionTypes.FETCH_PLAYBACK_DATA_FAILURE ]
       }))
-    }, 1000))
+      .then(() => dispatch({ type: actionTypes.TRACK_INFO_LOAD_DONE }))
+    }, 500))
 }
 
 export const play = item => dispatch => {
