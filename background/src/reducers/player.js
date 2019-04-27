@@ -11,7 +11,7 @@ const defaultState = {
 export default (state = defaultState, action) => {
   switch (action.type) {
     case actionTypes.FETCH_PLAYBACK_DATA_SUCCESS:
-      return { ...state, playback: { ...action.response, device: { ...action.response.device, "previous_volume_percent": action.response.device["volume_percent"] }}}
+      return { ...state, playback: action.response }
 
     case actionTypes.FETCH_AVAILABLE_DEVICES_SUCCESS:
       const activeDevice = action.response.find(device => device["is_active"])

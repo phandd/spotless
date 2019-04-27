@@ -24,7 +24,7 @@ class ContentContainer extends Component {
     }
   
     let content;
-  
+
     switch (selectedMenubarItem) {
       case MENUBAR_ITEMS.PLAYER:
         content = <PlayerContainer /> // Menu component

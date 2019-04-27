@@ -18,7 +18,8 @@ export default (state = { token: null, login: true }, action) => {
   if (action.type === actionTypes.LOG_OUT) {
     return {
       ...state,
-      login: false
+      login: false,
+      token: ""
     }
   }
 
