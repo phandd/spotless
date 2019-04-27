@@ -2,7 +2,22 @@ import { createSelector } from 'reselect'
 
 export const getPlayback = state => state.player.playback
 export const getPlaybackItem = state => state.player.playback ? state.player.playback.item : null
-export const getCoverArtUrl = createSelector(getPlaybackItem, playbackItem => playbackItem ? playbackItem.album.images[0].url : null)
+export const getCoverArtUrl = createSelector(getPlaybackItem, playbackItem => {
+  if (!playbackItem || !playbackItem.album || !playbackItem.album.images) {
+    return null
+  }
+
+  let expectedImage
+
+  for (let image of playbackItem.album.images) {
+    if (image.height > 150 && image.height < 350) {
+      expectedImage = image
+      break;
+    }
+  }
+
+  return expectedImage ? expectedImage.url : playbackItem.album.images[0].url
+})
 export const getTrackName = createSelector(getPlaybackItem, playbackItem => playbackItem ? playbackItem.name : null)
 export const getArtists = createSelector(getPlaybackItem, playbackItem => {
   if (!playbackItem) {
