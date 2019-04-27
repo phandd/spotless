@@ -22,46 +22,54 @@ const _fetchAvailableDevices = () => dispatch => {
 // the first device in the available device list if there is
 // no active device. Therefore it only being called after
 // available devices api is returned.
-//
-// Same with fetch playing track, it only being called
-// when there's an activating device
+
 export const fetchPlayerData = () => (dispatch, getState) => {
   dispatch({ type: actionTypes.PLAYER_LOAD_LOADING })
 
-  dispatch(_fetchAvailableDevices())
+  dispatch(_fetchPlaybackData())
     .then(() => {
-      if (!getState().player.availableDevices.length) {
-        return Promise.reject('No device available')
-      }
+      if (!getState().player.playback || !getState().player.playback.device) {
+        return dispatch(_fetchAvailableDevices())
+          .then(() => {
+            if (!getState().player.availableDevices.length) {
+              return Promise.reject('No device available')
+            }
 
-      if (!getState().player.activeDevice) {
-        return dispatch(callApiThunk({
-          endpoint: playerEndpointGetters.transferPlaybackEndpoint(),
-          method: 'PUT',
-          types: [ actionTypes.TRANSFER_PLAYBACK_REQUEST, actionTypes.TRANSFER_PLAYBACK_SUCCESS, actionTypes.TRANSFER_PLAYBACK_FAILURE ],
-          body: {
-            "device_ids": [
-              getState().player.availableDevices[0].id
-            ]
-          }
-        }, { device: getState().player.availableDevices[0] }))
+            if (!getState().player.activeDevice) {
+              return dispatch(_transferPlayback(getState().player.availableDevices[0]))
+            }
+          })
+          .then(() => new Promise((resolve, reject) => {
+            setTimeout(() => {
+              dispatch(_fetchPlaybackData())
+                .then(() => resolve())
+            }, 500)
+          }))
       }
-
-      return Promise.resolve()
     })
-    // Timeout is needed because transfer playback is done a bit slow by Spotify despite that it already returns 204
-    .then(() => new Promise((resolve, reject) => {
-      setTimeout(() => {
-        dispatch(callApiThunk({
-          endpoint: playerEndpointGetters.getPlaybackDataEndpoint(),
-          method: 'GET',
-          types: [ actionTypes.FETCH_PLAYBACK_DATA_REQUEST, actionTypes.FETCH_PLAYBACK_DATA_SUCCESS, actionTypes.FETCH_PLAYBACK_DATA_FAILURE ]
-        }))
-        .then(() => resolve())
-      }, 1000)
-    }))
-    .then(() => getState().player.playback.item && dispatch(checkTrackIsFavorited(getState().player.playback.item.id)))
     .finally(() => dispatch({ type: actionTypes.PLAYER_LOAD_DONE }))
+    .then(() => getState().player.playback.item && dispatch(checkTrackIsFavorited(getState().player.playback.item.id)))
+  }
+
+const _fetchPlaybackData = () => dispatch => {
+  return dispatch(callApiThunk({
+    endpoint: playerEndpointGetters.getPlaybackDataEndpoint(),
+    method: 'GET',
+    types: [actionTypes.FETCH_PLAYBACK_DATA_REQUEST, actionTypes.FETCH_PLAYBACK_DATA_SUCCESS, actionTypes.FETCH_PLAYBACK_DATA_FAILURE]
+  }));
+}
+
+const _transferPlayback = device => dispatch => {
+  return dispatch(callApiThunk({
+    endpoint: playerEndpointGetters.transferPlaybackEndpoint(),
+    method: 'PUT',
+    types: [actionTypes.TRANSFER_PLAYBACK_REQUEST, actionTypes.TRANSFER_PLAYBACK_SUCCESS, actionTypes.TRANSFER_PLAYBACK_FAILURE],
+    body: {
+      "device_ids": [
+        device.id
+      ]
+    }
+  }, { device }))
 }
 
 export const onTogglePlay = () => (dispatch, getState) => {
@@ -177,7 +185,7 @@ export const onSetVolume = percent => (dispatch, getState) => {
     method: 'PUT',
     types: [ actionTypes.SET_VOLUME_REQUEST, actionTypes.SET_VOLUME_SUCCESS, actionTypes.SET_VOLUME_FAILURE ]
   }, {
-    from: +(getState().player.playback && getState().player.playback.device["volume_percent"]) || 50,
+    from: +getState().player.playback.device["volume_percent"],
     to: +percent
   }))
 }
