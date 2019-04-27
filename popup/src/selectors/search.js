@@ -36,3 +36,4 @@ export const getSearchItemPlayingStatus = () => createSelector(getSearchItem, ge
   return searchItem.id === playback.item.id
 })
 export const getLastSearch = state => state.search.lastSearch
+export const getSearchStatus = state => state.search.searching

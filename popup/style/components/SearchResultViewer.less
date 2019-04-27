@@ -1,6 +1,24 @@
-.search-result {
-  overflow-y: scroll;
+.search-result-wrapper {
   height: 260px;
+  position: relative;
+
+  .search-result-loader {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+  }
+}
+
+.search-result {
+  height: 260px;
+  position: relative;
+  overflow-y: scroll;
+
+  &.searching {
+    overflow-y: hidden;
+  }
 }
 
 .search-result-viewer {
