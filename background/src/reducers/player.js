@@ -5,7 +5,8 @@ const defaultState = {
   playback: null,
   availableDevices: null,
   activeDevice: null,
-  loading: true
+  loading: true,
+  track_info_loading: false
 }
 
 export default (state = defaultState, action) => {
@@ -110,6 +111,18 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         loading: false
+      }
+
+    case actionTypes.TRACK_INFO_LOADING:
+    return {
+      ...state,
+      track_info_loading: true
+    }
+
+    case actionTypes.TRACK_INFO_LOAD_DONE:
+      return {
+        ...state,
+        track_info_loading: false
       }
 
     default:
