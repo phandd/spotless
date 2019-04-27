@@ -1,17 +1,14 @@
 # spotless
-Spotless is a Chrome extension allows you to control your Spotify player, search and play music by calling Spotify API.
+Spotless is a Chrome extension allows you to control your Spotify player, mute annoying ads, search and play music everywhere.
 
- ![spotless_demo](https://user-images.githubusercontent.com/20087095/56460697-eeaa5b00-63d0-11e9-9725-1f50075a0a3b.gif)
+ ![spotless_demo](https://user-images.githubusercontent.com/20087095/56844564-75cd6680-68dc-11e9-8cbc-e8755a6a3bab.gif)
 
 ## Installation
 The extension is available on [Chrome Store](https://chrome.google.com/webstore/detail/spotless/allccgoelledmdfenijoodhcfjndddjh)
 
 ## Getting started
-You can download the packed `.crx` version to install to your Chrome browser or build one yourself.
+You can clone and build the extension yourself:
 
-### To use packed version:
- - Download `.crx` from [release](https://github.com/phandd/spotless/releases), open the `Extension` menu from your Chrome browser and drag `spotless.crx` to install the extension.
-### To build the extension:
 ```sh
 git clone https://github.com/phandd/spotless
 ```
@@ -19,7 +16,7 @@ navigate to project directory and install dependencies:
 ```
 npm install
 ```
-build the extension:
+and build the extension:
 ```
 npm run build
 ```
@@ -32,8 +29,14 @@ then you're good to go!
 
 ## Usage
  - This extension only compatible with Spotify web app and desktop app. It also requires you to login to Spotify on web app to be able to use your cookies.
+
  - You need at least one available device running Spotify (either web app player or desktop app player) to use the extension, which makes sense, you wouldn't be able to listen to music if you don't have any device opening Spotify, the extensions cannot play music itself, it's a controller.
- - Controlling mobile device is a feature for Spotify Premium users, this extensions will not work with mobile device unless you're Spotify Premium user.
+
+- The Ads mute feature only work if you have a tab opening https://open.spotify.com on your Chrome browser. So the extension can detect whether an ads or a song is playing.
+
+- You can still play music on your Spotify desktop client and mute the ads, as long as you open https://open.spotify.com on a tab of your browser for the extension to work.
+
+ - Controlling mobile device is a feature for Spotify Premium users, this extensions will not work with mobile device.
  
 ## Tech stack
  - **ReactJs, ReduxJs, normalizr, reselect** for Web app
