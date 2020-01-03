@@ -1,7 +1,6 @@
 import { Store, applyMiddleware } from 'react-chrome-redux'
 import thunkMiddleware from 'redux-thunk';
 import { getPlaybackData, onVolumeMuteToggle } from './actions/player'
-
 const store = new Store({
   portName: 'spotless'
 })

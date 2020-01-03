@@ -1,22 +1,21 @@
 import { AUTH as actionTypes } from '../constants/actionTypes'
 import { callApiThunk } from '../utils/api'
+import axios from 'axios'
 
 export const getTokenFromCookie = () => dispatch => {
-  return new Promise((resolve, reject) => {
-    chrome.cookies.get({
-      url: 'https://spotify.com',
-      name: 'wp_access_token'
-    }, cookie => {
-      if (cookie) {
-        resolve(dispatch({
-          type: actionTypes.GET_TOKEN_SUCCESS,
-          token: cookie.value
-        }))
-      }
+  return axios({
+    url:
+      "https://open.spotify.com/access_token?reason=transport&productType=web_player"
+  }).then(res => {
+    if (res.data.accessToken) {
+      return dispatch({
+        type: actionTypes.GET_TOKEN_SUCCESS,
+        token: res.data.accessToken
+      });
+    }
 
-      reject('Token cookie is not exist')
-    })
-  })
+    throw new Error("Token cookie is not exist");
+  });
 }
 
 export const authenticate = () => dispatch => {
