@@ -5,7 +5,7 @@ import axios from 'axios'
 export const getTokenFromCookie = () => dispatch => {
   return axios({
     url:
-      "https://open.spotify.com/access_token?reason=transport&productType=web_player"
+      "https://open.spotify.com/get_access_token?reason=transport&productType=web_player"
   }).then(res => {
     if (res.data.accessToken) {
       return dispatch({
