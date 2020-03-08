@@ -10,13 +10,14 @@ const storeWithMiddleware = applyMiddleware(store, ...middleware);
 
 storeWithMiddleware.ready().then(() => {
   let muting = false
+  console.log('--------content script ran------------')
   const observer = new MutationObserver(() => {
     // const urlContainsAds = document.querySelector('.now-playing a').href.includes('ad');
-    const artistIsSpotify = document.querySelector('.track-info__artists a').text === 'Spotify'
-    const trackNameIsAds = document.querySelector('.track-info__name a').text === 'Advertisement'
-    const titleContainsAds = document.title.includes('Advertisement')
-
-    if (artistIsSpotify || trackNameIsAds || titleContainsAds) {
+    // const artistIsSpotify = document.querySelector('.track-info__artists a').text === 'Spotify'
+    // const trackNameIsAds = document.querySelector('.track-info__name a').text === 'Advertisement'
+    const titleContainsAds = document.title.includes('Advertisement') || document.title.includes('Spotify')
+    
+    if (titleContainsAds) {
       if (!muting) {
         store.dispatch(getPlaybackData())
         .then(() => {
@@ -34,7 +35,7 @@ storeWithMiddleware.ready().then(() => {
   })
 
   const interval = setInterval(() => {
-    const trackInfoElement = document.querySelector('.track-info')
+    const trackInfoElement = document.querySelector('.now-playing')
 
     if (trackInfoElement) {
       clearInterval(interval)
