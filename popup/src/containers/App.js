@@ -13,7 +13,7 @@ class App extends Component {
     return (
       <div className="container">
         <SpotifyLogo />
-        <Menubar />
+        {/* <Menubar /> */}
         <ContentContainer />
       </div>
     )

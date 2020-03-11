@@ -14,7 +14,6 @@
     "default_popup": "popup.html"
   },
   "permissions": [
-    "cookies",
     "https://open.spotify.com/",
     "https://spotify.com/"
   ],
