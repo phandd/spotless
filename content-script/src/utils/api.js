@@ -6,7 +6,6 @@ import { AUTH as authActionTypes } from '../constants/actionTypes'
 
 
 const API_ROOT = 'https://api.spotify.com/v1'
-// const access_token = 'BQA95RZP55zb8UNBZ5fkJYx0-y5nI6yAn1eLLwSF1WcER2OKs_OXGMcsHwiWez9N0qVQL9v4h-2J4_bnOjv9zxHIue1_NSjEK04GJqMFXnBtRLvn2SjtfSLSVs8Mg3pbKGAEijNfpRhH1yknpuiWWSZ49okuQuuhNCFy_fPyMnPe-uphbJ8PajDAfD5PSbA_OkF8mxPTM5dIdGUgeCjoe6MbwMQAQo-n2Tom46g3bvq2wFaAB0eY-kyMsvtMxKDihZ26-k8VhGTnCD7PglA2SmWyeHZyF4pZxyj-bUfKDLagxQ'
 
 let access_token
 let authenticated = true; // This value representing the authenticate status
